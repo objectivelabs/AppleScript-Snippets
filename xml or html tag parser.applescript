@@ -1,9 +1,9 @@
 (*
-This handler is intended to accept a string input, and remove the contents of a specific tag within that sting input. This is great for getting string contents out of xml or html files. For example, if you want to get the title of an html document you call
-tagParse(yourFileContents, "")
-
-it would return the text between the two title tags. 
-*)
+ This handler is intended to accept a string input, and remove the contents of a specific tag within that sting input. This is great for getting string contents out of xml or html files. For example, if you want to get the title of an html document you call
+ tagParse(yourFileContents, "")
+ 
+ it would return the text between the two title tags. 
+ *)
 on tagParse(thisText, openTag, closeTag)
 	set new_text to ""
 	set strlen to the length of thisText

@@ -1,7 +1,7 @@
 (* This script will convert anything in the finder to text, and then sort that text. Procedure is to copy an item. Run this script from the script menu, then paste.
-*)
-set the clipboard to list_to_string(ASCII_Sort(string_to_list(«class ktxt» of ((the clipboard as text) as record), return)), return)
-
+ *)
+ set the clipboard to list_to_string(ASCII_Sort(string_to_list(«class ktxt» of ((the clipboard as text) as record), return)), return)
+ 
 on ASCII_Sort(my_list)
 	--from apple
 	set the index_list to {}
@@ -14,7 +14,7 @@ on ASCII_Sort(my_list)
 				if the low_item is "" then
 					set the low_item to this_item
 					set the low_item_index to i
-				else if this_item comes before the low_item then
+                    else if this_item comes before the low_item then
 					set the low_item to this_item
 					set the low_item_index to i
 				end if
@@ -25,26 +25,26 @@ on ASCII_Sort(my_list)
 	end repeat
 	return the sorted_list
 end ASCII_Sort
-
-
+ 
+ 
 on snr(the_string, search_string, replace_string)
 	return my list_to_string((my list_to_string(the_string, search_string)), replace_string)
 end snr
-
+ 
 on list_to_string(the_list, the_delim)
 	my atid(the_delim)
 	set the_string to (every text item of the_list) as string
 	my atid("")
 	return the_string
 end list_to_string
-
+ 
 on string_to_list(the_string, the_delim)
 	my atid(the_delim)
 	set the_list to (every text item of the_string) as list
 	my atid("")
 	return the_list
 end string_to_list
-
+ 
 on atid(the_delim)
-	set AppleScript's text item delimiters to the_delim
+	set Applescript's text item delimiters to the_delim
 end atid

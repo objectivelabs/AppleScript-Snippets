@@ -1,26 +1,14 @@
-on fileMove(theFile, theLocation, overwrite)
+on isFileBusy(thePath)
+    --Tests to see if a file is in use
 	try
-		if overwrite is "1" or overwrite is "true" or overwrite is true then
-			set theOption to "-f "
-		else
-			set theOption to "-n "
+		set myscript to "if ( lsof -Fp " & thePath & " | grep -q p[0-9]* ) then echo 'file is busy'; else echo 'not busy';fi"
+		set myResult to do shell script myscript
+		if myResult is "file is busy" then
+			return true
+            else
+			return false
 		end if
-		if overwrite is "0" or overwrite is "false" or overwrite is false then
-			set itExists to doesThisExist(theFile)
-			if itExists is true then
-				set thescript to ""
-				logIt(false, false, "", theFile & " already exists.")
-			else
-				set thescript to "mv " & theOption & "'" & theFile & "' '" & theLocation & "/'"
-			end if
-		else
-			set thescript to "mv " & theOption & "'" & theFile & "' '" & theLocation & "/'"
-		end if
-		set thescript to snr(thescript, "//", "/")
-		logIt(false, true, "", theName of myFrom & " " & thescript)
-		--logIt(false, false, "", theScript)
-		doshellscript(thescript)
-	on error err
-		logIt(false, false, "", "Error: fileMove: " & err)
+        on error err
+		Display Dialog ("Error: isFileBusy " & err) giving up after 5
 	end try
-end fileMove
+end isFileBusy
